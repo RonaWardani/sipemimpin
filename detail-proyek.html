@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Proyek | SiPEMIMPIN</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    .gallery-image {
+      transition: transform 0.3s;
+    }
+    .gallery-image:hover {
+      transform: scale(1.03);
+    }
+    .progress-ring__circle {
+      transition: stroke-dashoffset 0.5s;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Navbar (sama seperti sebelumnya) -->
+
+  <!-- Breadcrumb -->
+  <div class="bg-blue-50 py-4">
+    <div class="container mx-auto px-4">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
+          <li class="inline-flex items-center">
+            <a href="index.html" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800">
+              <i class="fas fa-home mr-2"></i> Beranda
+            </a>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+              <a href="sda.html" class="ml-2 text-sm font-medium text-blue-600 hover:text-blue-800">Proyek</a>
+            </div>
+          </li>
+          <li aria-current="page">
+            <div class="flex items-center">
+              <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
+              <span class="ml-2 text-sm font-medium text-gray-500">Detail Proyek</span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8">
+    <div id="project-detail">
+      <!-- Konten akan dimuat di sini -->
+    </div>
+
+    <!-- Gallery Section -->
+    <div class="mt-16" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Dokumentasi Proyek</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+          <img src="https://via.placeholder.com/300x200?text=Foto+1" alt="Dokumentasi" class="w-full h-32 object-cover hover:scale-105 transition">
+        </div>
+        <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+          <img src="https://via.placeholder.com/300x200?text=Foto+2" alt="Dokumentasi" class="w-full h-32 object-cover hover:scale-105 transition">
+        </div>
+        <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+          <img src="https://via.placeholder.com/300x200?text=Foto+3" alt="Dokumentasi" class="w-full h-32 object-cover hover:scale-105 transition">
+        </div>
+        <div class="gallery-image overflow-hidden rounded-lg shadow-md">
+          <img src="https://via.placeholder.com/300x200?text=Foto+4" alt="Dokumentasi" class="w-full h-32 object-cover hover:scale-105 transition">
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Timeline -->
+    <div class="mt-16" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800 border-b pb-2">Timeline Proyek</h2>
+      <div class="relative">
+        <!-- Timeline akan di-generate oleh JavaScript -->
+        <div id="timeline" class="space-y-8"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer (sama seperti sebelumnya) -->
+
+  <!-- Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="assets/js/projects.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const projectId = urlParams.get('id');
+      const project = getProjectById(projectId);
+      
+      // Render project detail
+      document.getElementById('project-detail').innerHTML = `
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
+          <div class="relative h-64 md:h-80 overflow-hidden">
+            <img src="${project.image}" alt="${project.name}" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+              <h1 class="text-2xl md:text-3xl font-bold text-white">${project.name}</h1>
+              <div class="flex items-center text-white/90 mt-2">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                <span>${project.location}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="grid md:grid-cols-3 gap-8 p-6">
+            <!-- Info Box -->
+            <div class="md:col-span-2">
+              <h2 class="text-xl font-bold mb-4 text-gray-800">Deskripsi Proyek</h2>
+              <p class="text-gray-700 leading-relaxed">${project.description}</p>
+              
+              <h2 class="text-xl font-bold mt-8 mb-4 text-gray-800">Detail</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h3 class="font-semibold text-gray-600 mb-2">Kontraktor</h3>
+                  <p class="text-gray-800">${project.contractor}</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h3 class="font-semibold text-gray-600 mb-2">Anggaran</h3>
+                  <p class="text-gray-800">${project.budget}</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h3 class="font-semibold text-gray-600 mb-2">Tanggal Mulai</h3>
+                  <p class="text-gray-800">${project.start_date}</p>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                  <h3 class="font-semibold text-gray-600 mb-2">Tanggal Selesai</h3>
+                  <p class="text-gray-800">${project.end_date}</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Progress Ring -->
+            <div class="flex flex-col items-center justify-center">
+              <div class="relative w-40 h-40 mb-4">
+                <svg class="w-full h-full" viewBox="0 0 100 100">
+                  <!-- Background circle -->
+                  <circle class="text-gray-200" stroke-width="8" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                  <!-- Progress circle -->
+                  <circle class="text-blue-600" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="${251.2 - (251.2 * project.progress / 100)}" stroke-linecap="round" stroke="currentColor" fill="transparent" r="40" cx="50" cy="50" />
+                </svg>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                  <span class="text-3xl font-bold text-gray-800">${project.progress}%</span>
+                  <p class="text-sm text-gray-600 mt-1">Progress</p>
+                </div>
+              </div>
+              <div class="text-center">
+                <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition flex items-center mx-auto">
+                  <i class="fas fa-camera mr-2"></i> Lihat Dokumentasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Render timeline
+      const timeline = document.getElementById('timeline');
+      const milestones = [
+        { date: "Jan 2024", event: "Persiapan Lahan", progress: 10 },
+        { date: "Mar 2024", event: "Pembangunan Struktur Utama", progress: 40 },
+        { date: "Mei 2024", event: "Pengerjaan Tahap Akhir", progress: 75 },
+        { date: "Jul 2024", event: "Penyelesaian", progress: 100 }
+      ];
+      
+      milestones.forEach((milestone, index) => {
+        timeline.innerHTML += `
+          <div class="relative pl-8 pb-8 border-l-2 border-blue-200 last:border-0 last:pb-0 group">
+            <div class="absolute w-4 h-4 bg-blue-600 rounded-full -left-2 top-0.5 ring-4 ring-blue-100"></div>
+            <time class="block text-sm font-semibold text-blue-600">${milestone.date}</time>
+            <h3 class="text-lg font-medium text-gray-800 mt-1">${milestone.event}</h3>
+            <div class="mt-2">
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 h-2 rounded-full" style="width: ${milestone.progress}%"></div>
+              </div>
+              <span class="text-xs text-gray-500 mt-1">${milestone.progress}% selesai</span>
+            </div>
+          </div>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sekretariat | PUPR Halteng</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    .org-chart li::before {
+      content: "";
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      border-left: 2px solid #818cf8;
+      width: 0;
+      height: 15px;
+    }
+    .org-chart ul li::after {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      border-left: 2px solid #818cf8;
+      width: 0;
+      height: 100%;
+    }
+    .org-chart li:only-child::after {
+      display: none;
+    }
+    .document-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.2);
+    }
+
+      /* CSS untuk Struktur Organisasi yang Diperbaiki */
+  .org-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .org-level-1, .org-level-2, .org-level-3 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .org-level-1 { margin-bottom: 2rem; }
+  .org-level-2 { margin-bottom: 1.5rem; }
+  .org-level-3 { margin-bottom: 1rem; }
+
+  .org-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1rem;
+    position: relative;
+    min-width: 200px;
+  }
+
+  .org-position {
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .org-name {
+    margin-top: 0.5rem;
+    color: #4b5563;
+    font-size: 0.875rem;
+    text-align: center;
+  }
+
+  .org-connector {
+    position: absolute;
+    bottom: -1.5rem;
+    width: 2px;
+    height: 1.5rem;
+    background-color: #818cf8;
+  }
+
+  /* Garis penghubung horizontal */
+  .org-level-2::before, .org-level-3::before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background-color: #818cf8;
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 4rem);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .org-level-1, .org-level-2, .org-level-3 {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .org-node {
+      margin: 0.5rem 0;
+    }
+    
+    .org-connector {
+      display: none;
+    }
+    
+    .org-level-2::before, .org-level-3::before {
+      width: 2px;
+      height: 1.5rem;
+      top: auto;
+      left: 50%;
+    }
+  }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Navbar -->
+  <nav class="bg-indigo-800 text-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="index.html" class="flex items-center space-x-2">
+        <i class="fas fa-landmark text-2xl"></i>
+        <span class="text-xl font-bold">PUPR Halteng</span>
+      </a>
+      <div class="hidden md:flex space-x-6">
+        <a href="index.html" class="hover:text-indigo-200">Beranda</a>
+        <a href="sekretariat.html" class="font-semibold text-indigo-200">Sekretariat</a>
+        <a href="jasa-konstruksi.html" class="hover:text-indigo-200">Jasa Konstruksi</a>
+      </div>
+      <button class="bg-indigo-600 px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+        <i class="fas fa-sign-in-alt mr-2"></i>Login
+      </button>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-indigo-700 to-indigo-900 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4" data-aos="fade-up">
+        <i class="fas fa-landmark mr-2"></i> Sekretariat PUPR
+      </h1>
+      <p class="text-lg opacity-90 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        Pusat administrasi dan pengelolaan dokumen strategis Dinas Pekerjaan Umum dan Perumahan Rakyat Halmahera Tengah
+      </p>
+    </div>
+  </header>
+
+  <!-- Menu Utama -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Struktur Organisasi -->
+      <a href="#struktur-organisasi" class="group">
+        <div class="bg-white rounded-lg shadow-md p-6 text-center transition-all duration-300 hover:bg-indigo-50" data-aos="fade-up">
+          <div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-indigo-200">
+            <i class="fas fa-sitemap text-2xl text-indigo-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Struktur Organisasi</h3>
+          <p class="text-gray-600 text-sm">Bagan hierarki organisasi PUPR Halteng</p>
+        </div>
+      </a>
+
+      <!-- SAKIP -->
+      <a href="#sakip" class="group">
+        <div class="bg-white rounded-lg shadow-md p-6 text-center transition-all duration-300 hover:bg-indigo-50" data-aos="fade-up" data-aos-delay="100">
+          <div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-indigo-200">
+            <i class="fas fa-chart-line text-2xl text-indigo-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">SAKIP</h3>
+          <p class="text-gray-600 text-sm">Sistem Akuntabilitas Kinerja Instansi</p>
+        </div>
+      </a>
+
+      <!-- Renstra -->
+      <a href="#renstra" class="group">
+        <div class="bg-white rounded-lg shadow-md p-6 text-center transition-all duration-300 hover:bg-indigo-50" data-aos="fade-up" data-aos-delay="200">
+          <div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-indigo-200">
+            <i class="fas fa-chess-rook text-2xl text-indigo-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Renstra</h3>
+          <p class="text-gray-600 text-sm">Rencana Strategis 2020-2024</p>
+        </div>
+      </a>
+
+      <!-- Renja -->
+      <a href="#renja" class="group">
+        <div class="bg-white rounded-lg shadow-md p-6 text-center transition-all duration-300 hover:bg-indigo-50" data-aos="fade-up" data-aos-delay="300">
+          <div class="bg-indigo-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:bg-indigo-200">
+            <i class="fas fa-tasks text-2xl text-indigo-600"></i>
+          </div>
+          <h3 class="text-lg font-bold text-gray-800 mb-2">Renja</h3>
+          <p class="text-gray-600 text-sm">Rencana Kerja Tahunan</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Struktur Organisasi - Versi Diperbaiki -->
+<section id="struktur-organisasi" class="container mx-auto px-4 py-12 bg-gray-50">
+  <h2 class="text-2xl font-bold mb-8 text-center text-gray-800" data-aos="fade-up">
+    <i class="fas fa-sitemap mr-2 text-indigo-600"></i> Struktur Organisasi PUPR Halteng
+  </h2>
+  
+  <div class="bg-white rounded-xl shadow-lg p-6 overflow-auto" data-aos="fade-up">
+    <!-- Organizational Chart Container -->
+    <div class="org-tree">
+      <!-- Level 1: Kepala Dinas -->
+      <div class="org-level-1">
+        <div class="org-node">
+          <div class="org-position bg-indigo-600">Kepala Dinas</div>
+          <div class="org-name">Ir. Arief Jalaludin, M.T.</div>
+          <div class="org-connector"></div>
+        </div>
+      </div>
+
+      <!-- Level 2: Sketratris -->
+      <div class="org-level-1">
+        <div class="org-node">
+          <div class="org-position bg-indigo-600">Sektretaris</div>
+          <div class="org-name">Bahri Nurdin  </div>
+          <div class="org-connector"></div>
+        </div>
+      </div>
+
+      <!-- Level 2: Eselon II -->
+      <div class="org-level-2">
+       
+
+          <!-- Bidang Tata Ruang -->
+        <div class="org-node">
+          <div class="org-position bg-indigo-500">Kepala Bidang Tata Ruang</div>
+          <div class="org-name">Bambang Prakoso, ST</div>
+          <div class="org-connector"></div>
+        </div>
+
+        <!-- Bidang SDA -->
+        <div class="org-node">
+          <div class="org-position bg-indigo-500">Kepala Bidang SDA</div>
+          <div class="org-name">Rufai Alting, ST</div>
+          <div class="org-connector"></div>
+        </div>
+
+        <!-- Bidang Bina Marga -->
+        <div class="org-node">
+          <div class="org-position bg-indigo-500">Kepala Bidang Bina Marga</div>
+          <div class="org-name">Rislawati Karim, ST</div>
+          <div class="org-connector"></div>
+        </div>
+      </div>
+
+      <!-- Level 3: Subbag di bawah Sekretaris -->
+      <div class="org-level-3">
+        <!-- Subbag Program -->
+        <div class="org-node">
+          <div class="org-position bg-indigo-400">Subbag</div>
+          <div class="org-name">......</div>
+        </div>
+
+        <!-- Subbag Keuangan -->
+        <div class="org-node">
+          <div class="org-position bg-indigo-400">Subbag</div>
+          <div class="org-name">.....</div>
+        </div>
+
+        <!-- Subbag Umum -->
+        <div class="org-node">
+          <div class="org-position bg-indigo-400">Subbag</div>
+          <div class="org-name">.....</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="#" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+        <i class="fas fa-download mr-2"></i>Unduh Struktur Lengkap (PDF)
+      </a>
+    </div>
+  </div>
+</section>
+
+  <!-- Dokumen Strategis -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- SAKIP -->
+      <div id="sakip" class="bg-white rounded-xl shadow-md overflow-hidden document-card transition-all duration-300" data-aos="fade-up">
+        <div class="bg-indigo-100 p-6 flex items-center">
+          <i class="fas fa-chart-line text-4xl text-indigo-600 mr-4"></i>
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">SAKIP</h3>
+            <p class="text-gray-600">Sistem Akuntabilitas Kinerja Instansi Pemerintah</p>
+          </div>
+        </div>
+        <div class="p-6">
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Perjanjian Kinerja Tahun 2024</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Indikator Kinerja Utama (IKU)</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+              <span>Laporan Kinerja Triwulanan</span>
+            </li>
+          </ul>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center">
+              <i class="fas fa-file-pdf mr-2"></i> Dokumen
+            </a>
+            <a href="#" class="px-4 py-2 bg-white border border-indigo-600 text-indigo-600 rounded-md hover:bg-indigo-50 transition flex items-center">
+              <i class="fas fa-chart-bar mr-2"></i> Dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Renstra -->
+      <div id="renstra" class="bg-white rounded-xl shadow-md overflow-hidden document-card transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+        <div class="bg-indigo-100 p-6 flex items-center">
+          <i class="fas fa-chess-rook text-4xl text-indigo-600 mr-4"></i>
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Renstra 2020-2024</h3>
+            <p class="text-gray-600">Rencana Strategis Dinas PUPR Halteng</p>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center text-sm text-gray-500 mb-4">
+            <i class="fas fa-calendar-alt mr-2"></i>
+            <span>Periode: 2020 - 2024</span>
+          </div>
+          <p class="text-gray-700 mb-4">Dokumen perencanaan strategis yang memuat visi, misi, tujuan, strategi, dan program pembangunan infrastruktur di Halmahera Tengah.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center">
+              <i class="fas fa-book-open mr-2"></i> Baca Dokumen
+            </a>
+            <a href="#" class="px-4 py-2 bg-white border border-indigo-600 text-indigo-600 rounded-md hover:bg-indigo-50 transition flex items-center">
+              <i class="fas fa-download mr-2"></i> Unduh
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Renja -->
+      <div id="renja" class="bg-white rounded-xl shadow-md overflow-hidden document-card transition-all duration-300" data-aos="fade-up">
+        <div class="bg-indigo-100 p-6 flex items-center">
+          <i class="fas fa-tasks text-4xl text-indigo-600 mr-4"></i>
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Renja 2024</h3>
+            <p class="text-gray-600">Rencana Kerja Tahun 2024</p>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center text-sm text-gray-500 mb-4">
+            <i class="fas fa-calendar-check mr-2"></i>
+            <span>Tahun Anggaran: 2024</span>
+          </div>
+          <p class="text-gray-700 mb-4">Penjabaran Renstra ke dalam program dan kegiatan tahunan dengan alokasi anggaran yang jelas.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center">
+              <i class="fas fa-file-excel mr-2"></i> Excel
+            </a>
+            <a href="#" class="px-4 py-2 bg-white border border-indigo-600 text-indigo-600 rounded-md hover:bg-indigo-50 transition flex items-center">
+              <i class="fas fa-print mr-2"></i> Cetak
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- LAKIP -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden document-card transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+        <div class="bg-indigo-100 p-6 flex items-center">
+          <i class="fas fa-file-alt text-4xl text-indigo-600 mr-4"></i>
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">LAKIP 2023</h3>
+            <p class="text-gray-600">Laporan Akuntabilitas Kinerja Instansi</p>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center text-sm text-gray-500 mb-4">
+            <i class="fas fa-award mr-2"></i>
+            <span>Nilai Akuntabilitas: A (Sangat Baik)</span>
+          </div>
+          <p class="text-gray-700 mb-4">Laporan tahunan yang menyajikan capaian kinerja terhadap target yang telah ditetapkan dalam Renja.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition flex items-center">
+              <i class="fas fa-eye mr-2"></i> Tinjau
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sistem Digital -->
+  <section class="bg-gray-100 py-12">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl font-bold mb-8 text-center text-gray-800" data-aos="fade-up">
+        <i class="fas fa-laptop-code mr-2 text-indigo-600"></i> Sistem Digital Sekretariat
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- E-KIN -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+          <div class="bg-indigo-600 text-white p-6">
+            <div class="flex items-center">
+              <i class="fas fa-user-clock text-3xl mr-4"></i>
+              <h3 class="text-xl font-bold">E-KIN</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Sistem Elektronik Kinerja untuk monitoring harian pegawai</p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <i class="fas fa-users mr-2"></i>
+              <span>78 pegawai terdaftar</span>
+            </div>
+            <a href="#" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+              <i class="fas fa-sign-in-alt mr-2"></i>Akses Sistem
+            </a>
+          </div>
+        </div>
+        
+        <!-- SRIKANDI -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+          <div class="bg-indigo-600 text-white p-6">
+            <div class="flex items-center">
+              <i class="fas fa-coins text-3xl mr-4"></i>
+              <h3 class="text-xl font-bold">SRIKANDI</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Sistem Rencana Kerja dan Anggaran berbasis kinerja</p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <i class="fas fa-wallet mr-2"></i>
+              <span>Anggaran 2024: Rp 1,2 T</span>
+            </div>
+            <a href="#" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+              <i class="fas fa-sign-in-alt mr-2"></i>Akses Sistem
+            </a>
+          </div>
+        </div>
+        
+        <!-- Pra Lelang -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+          <div class="bg-indigo-600 text-white p-6">
+            <div class="flex items-center">
+              <i class="fas fa-gavel text-3xl mr-4"></i>
+              <h3 class="text-xl font-bold">Pra Lelang</h3>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">Persiapan pengadaan barang/jasa konstruksi</p>
+            <div class="flex items-center text-sm text-gray-500 mb-4">
+              <i class="fas fa-hard-hat mr-2"></i>
+              <span>12 paket sedang proses</span>
+            </div>
+            <a href="#" class="inline-block px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
+              <i class="fas fa-search mr-2"></i>Lihat Paket
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-lg font-bold mb-4">PUPR Halteng</h3>
+          <p class="text-gray-400">Dinas Pekerjaan Umum dan Penataan Ruang Kabupaten Halmahera Tengah.</p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Tautan Cepat</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-gray-400 hover:text-white">Beranda</a></li>
+            <li><a href="sekretariat.html" class="text-gray-400 hover:text-white">Sekretariat</a></li>
+            <li><a href="jasa-konstruksi.html" class="text-gray-400 hover:text-white">Jasa Konstruksi</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Kontak</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> Jl. Raya Weda, Halmahera Tengah</li>
+            <li class="flex items-center"><i class="fas fa-phone mr-2"></i> (0921) 654321</li>
+            <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> pupr@halteng.go.id</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Jam Layanan</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-center"><i class="fas fa-clock mr-2"></i> Senin-Kamis: 07.30-16.00</li>
+            <li class="flex items-center"><i class="fas fa-clock mr-2"></i> Jumat: 07.30-16.30</li>
+            <li class="flex items-center"><i class="fas fa-clock mr-2"></i> Sabtu-Minggu: Tutup</li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>© 2024 Dinas PUPR Provinsi Halmahera Tengah. Semua hak dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Inisialisasi AOS
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  </script>
+</body>
+</html>

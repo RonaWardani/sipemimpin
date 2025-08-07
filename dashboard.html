@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin SiPEMIMPIN</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    [x-cloak] { display: none !important; }
+    .sidebar {
+      transition: all 0.3s ease;
+      width: 280px;
+    }
+    .mobile-menu {
+      transform: translateX(-100%);
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+    @media (min-width: 768px) {
+      .mobile-menu {
+        transform: translateX(0);
+      }
+      .content {
+        margin-left: 280px;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100" x-data="dashboard()" x-cloak>
+  <!-- Mobile Header -->
+  <header class="bg-indigo-700 text-white p-4 flex justify-between items-center md:hidden">
+    <h1 class="text-xl font-bold">SiPEMIMPIN</h1>
+    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-white">
+      <i class="fas fa-bars text-xl"></i>
+    </button>
+  </header>
+
+  <!-- Sidebar -->
+  <div class="mobile-menu fixed inset-y-0 left-0 z-20 sidebar bg-white shadow-lg md:fixed"
+       :class="{ 'open': mobileMenuOpen }">
+    <div class="p-4 border-b flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-hard-hat text-2xl text-indigo-600"></i>
+        <span class="text-xl font-bold">SiPEMIMPIN</span>
+      </div>
+      <button @click="mobileMenuOpen = false" class="md:hidden text-gray-500">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="p-4">
+      <!-- User Profile -->
+      <div class="flex items-center space-x-3 mb-6">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Admin" class="w-10 h-10 rounded-full">
+        <div>
+          <p class="font-medium">Admin PUPR</p>
+          <p class="text-xs text-gray-500">Super Admin</p>
+        </div>
+      </div>
+      
+      <!-- Menu -->
+      <nav class="space-y-1">
+        <a href="#" class="flex items-center px-4 py-3 bg-indigo-50 text-indigo-600 rounded-lg">
+          <i class="fas fa-tachometer-alt mr-3"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+          <i class="fas fa-project-diagram mr-3"></i>
+          <span>Proyek</span>
+        </a>
+        <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+          <i class="fas fa-users mr-3"></i>
+          <span>Pengguna</span>
+        </a>
+        <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg">
+          <i class="fas fa-cog mr-3"></i>
+          <span>Pengaturan</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Overlay Mobile -->
+  <div class="fixed inset-0 bg-black bg-opacity-50 z-10 md:hidden" 
+       x-show="mobileMenuOpen" 
+       @click="mobileMenuOpen = false"
+       x-transition></div>
+
+  <!-- Main Content -->
+  <div class="content min-h-screen">
+    <!-- Desktop Header -->
+    <header class="bg-white shadow-sm p-4 hidden md:block">
+      <div class="flex justify-between items-center">
+        <h1 class="text-xl font-bold text-gray-800">Dashboard</h1>
+        <div class="flex items-center space-x-4">
+          <button class="p-2 text-gray-500 hover:text-gray-700 relative">
+            <i class="fas fa-bell text-xl"></i>
+            <span class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+          </button>
+          <div class="flex items-center space-x-2">
+            <span class="text-gray-700">Admin PUPR</span>
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-8 h-8 rounded-full">
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="p-4">
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <div class="bg-white p-6 rounded-lg shadow">
+          <div class="flex justify-between">
+            <div>
+              <p class="text-gray-500 text-sm">Total Proyek</p>
+              <h3 class="text-2xl font-bold mt-1">89</h3>
+              <p class="text-green-500 text-xs mt-1">
+                <i class="fas fa-arrow-up mr-1"></i> 12% dari bulan lalu
+              </p>
+            </div>
+            <div class="bg-indigo-100 p-3 rounded-full h-12 w-12 flex items-center justify-center">
+              <i class="fas fa-project-diagram text-indigo-600"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow">
+          <div class="flex justify-between">
+            <div>
+              <p class="text-gray-500 text-sm">Proyek Berjalan</p>
+              <h3 class="text-2xl font-bold mt-1">65</h3>
+              <p class="text-green-500 text-xs mt-1">
+                <i class="fas fa-arrow-up mr-1"></i> 8% dari bulan lalu
+              </p>
+            </div>
+            <div class="bg-blue-100 p-3 rounded-full h-12 w-12 flex items-center justify-center">
+              <i class="fas fa-tasks text-blue-600"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow">
+          <div class="flex justify-between">
+            <div>
+              <p class="text-gray-500 text-sm">Total Anggaran</p>
+              <h3 class="text-2xl font-bold mt-1">Rp 350M</h3>
+              <p class="text-red-500 text-xs mt-1">
+                <i class="fas fa-arrow-down mr-1"></i> 5% dari bulan lalu
+              </p>
+            </div>
+            <div class="bg-green-100 p-3 rounded-full h-12 w-12 flex items-center justify-center">
+              <i class="fas fa-wallet text-green-600"></i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow">
+          <div class="flex justify-between">
+            <div>
+              <p class="text-gray-500 text-sm">Pengguna Aktif</p>
+              <h3 class="text-2xl font-bold mt-1">42</h3>
+              <p class="text-green-500 text-xs mt-1">
+                <i class="fas fa-arrow-up mr-1"></i> 15% dari bulan lalu
+              </p>
+            </div>
+            <div class="bg-purple-100 p-3 rounded-full h-12 w-12 flex items-center justify-center">
+              <i class="fas fa-users text-purple-600"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two Column Layout -->
+      <div class="flex flex-col lg:flex-row gap-6">
+        <!-- Recent Projects -->
+        <div class="bg-white rounded-lg shadow p-6 flex-1">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold">Proyek Terbaru</h2>
+            <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800">Lihat Semua</a>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+              <div class="bg-indigo-100 p-2 rounded-lg mr-3">
+                <i class="fas fa-road text-indigo-600"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-medium">Jalan Desa Tobelo</h4>
+                <p class="text-sm text-gray-500">Bina Marga • Rp 2,5 M</p>
+                <div class="mt-2">
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-indigo-600 h-2 rounded-full" style="width: 65%"></div>
+                  </div>
+                  <span class="text-xs text-gray-500">65% selesai</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+              <div class="bg-blue-100 p-2 rounded-lg mr-3">
+                <i class="fas fa-water text-blue-600"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-medium">Normalisasi Sungai Weda</h4>
+                <p class="text-sm text-gray-500">SDA • Rp 1,8 M</p>
+                <div class="mt-2">
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-blue-600 h-2 rounded-full" style="width: 42%"></div>
+                  </div>
+                  <span class="text-xs text-gray-500">42% selesai</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-start p-3 hover:bg-gray-50 rounded-lg transition">
+              <div class="bg-green-100 p-2 rounded-lg mr-3">
+                <i class="fas fa-home text-green-600"></i>
+              </div>
+              <div class="flex-1">
+                <h4 class="font-medium">Rumah Sehat Desa Kobe</h4>
+                <p class="text-sm text-gray-500">Cipta Karya • Rp 1,2 M</p>
+                <div class="mt-2">
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-green-600 h-2 rounded-full" style="width: 85%"></div>
+                  </div>
+                  <span class="text-xs text-gray-500">85% selesai</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Project Table -->
+        <div class="bg-white rounded-lg shadow p-6 flex-1">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-bold">Daftar Proyek</h2>
+            <div class="flex space-x-2">
+              <select class="px-3 py-1 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-500">
+                <option>Semua Status</option>
+                <option>Berjalan</option>
+                <option>Selesai</option>
+              </select>
+              <button class="bg-indigo-600 text-white px-3 py-1 rounded-lg hover:bg-indigo-700 text-sm">
+                <i class="fas fa-plus mr-1"></i> Tambah
+              </button>
+            </div>
+          </div>
+          
+          <div class="overflow-x-auto">
+            <table class="min-w-full">
+              <thead>
+                <tr class="border-b">
+                  <th class="text-left py-3 px-4 text-sm font-medium text-gray-500">Nama Proyek</th>
+                  <th class="text-left py-3 px-4 text-sm font-medium text-gray-500">Kategori</th>
+                  <th class="text-left py-3 px-4 text-sm font-medium text-gray-500">Progress</th>
+                  <th class="text-left py-3 px-4 text-sm font-medium text-gray-500">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b hover:bg-gray-50 transition">
+                  <td class="py-3 px-4">
+                    <p class="font-medium">Jalan Desa Tobelo</p>
+                    <p class="text-xs text-gray-500">Desa Tobelo</p>
+                  </td>
+                  <td class="py-3 px-4 text-sm text-gray-500">Bina Marga</td>
+                  <td class="py-3 px-4">
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                      <div class="bg-indigo-600 h-2 rounded-full" style="width: 65%"></div>
+                    </div>
+                    <span class="text-xs text-gray-500">65%</span>
+                  </td>
+                  <td class="py-3 px-4">
+                    <button class="text-indigo-600 hover:text-indigo-900 mr-2">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="text-red-600 hover:text-red-900">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr class="border-b hover:bg-gray-50 transition">
+                  <td class="py-3 px-4">
+                    <p class="font-medium">Normalisasi Sungai Weda</p>
+                    <p class="text-xs text-gray-500">Kota Weda</p>
+                  </td>
+                  <td class="py-3 px-4 text-sm text-gray-500">SDA</td>
+                  <td class="py-3 px-4">
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                      <div class="bg-blue-600 h-2 rounded-full" style="width: 42%"></div>
+                    </div>
+                    <span class="text-xs text-gray-500">42%</span>
+                  </td>
+                  <td class="py-3 px-4">
+                    <button class="text-indigo-600 hover:text-indigo-900 mr-2">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="text-red-600 hover:text-red-900">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-sm text-gray-500">Menampilkan 1-2 dari 89 proyek</span>
+            <div class="flex space-x-1">
+              <button class="px-3 py-1 border rounded bg-gray-100 text-gray-600">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button class="px-3 py-1 border rounded bg-indigo-600 text-white">1</button>
+              <button class="px-3 py-1 border rounded bg-white text-gray-600">2</button>
+              <button class="px-3 py-1 border rounded bg-gray-100 text-gray-600">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Alpine.js -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script>
+    function dashboard() {
+      return {
+        mobileMenuOpen: false,
+        // Data dan fungsi lainnya bisa ditambahkan di sini
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiPEMIMPIN - PUPR Halteng</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Leaflet CSS (Peta) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- AOS (Animasi Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+  <!-- Navbar -->
+  <nav class="bg-blue-800 text-white shadow-lg fixed w-full z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fas fa-hard-hat text-2xl"></i>
+        <span class="text-xl font-bold">SiPEMIMPIN</span>
+        <span class="text-sm opacity-80 hidden md:inline">PUPR Halmahera Tengah</span>
+      </div>
+      <div class="hidden md:flex space-x-6">
+        <a href="#home" class="hover:text-blue-200">Beranda</a>
+        <a href="#projects" class="hover:text-blue-200">Proyek</a>
+        <a href="#map" class="hover:text-blue-200">Peta</a>
+        <a href="#about" class="hover:text-blue-200">Tentang</a>
+      </div>
+      <button class="bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 transition">
+        <i class="fas fa-sign-in-alt mr-2"></i>Login
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="home" class="pt-24 pb-16 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+    <div class="container mx-auto px-4 text-center" data-aos="fade-up">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">SiPEMIMPIN</h1>
+      <p class="text-xl opacity-90 mb-8">Sistem Informasi Pengawasan dan Pengendalian Infrstruktur</p>
+      <p class="text-xl opacity-90 mb-8">Transparansi dan Akuntabel</p>
+      <div class="max-w-2xl mx-auto relative" data-aos="fade-up" data-aos-delay="200">
+        <input type="text" placeholder="Cari proyek..." class="w-full py-3 px-4 rounded-full text-gray-800 shadow-lg">
+        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Peta Interaktif -->
+  <section id="map-section" class="container mx-auto px-4 py-12">
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden" data-aos="fade-up">
+      <div class="p-4 border-b">
+        <h2 class="text-xl font-semibold flex items-center">
+          <i class="fas fa-map-marked-alt text-blue-600 mr-2"></i>
+          Peta Sebaran Proyek Infrastruktur
+        </h2>
+      </div>
+      <div id="map" class="h-96 w-full"></div>
+      <div class="p-4 bg-gray-50 text-right">
+        <a href="#" class="text-blue-600 hover:underline">Lihat peta lengkap →</a>
+      </div>
+    </div>
+  </section> 
+
+  <!-- Kategori Bidang -->
+  <section id="categories" class="container mx-auto px-4 py-12">
+    <h2 class="text-2xl font-bold text-center mb-12" data-aos="fade-up">Bidang Infrastruktur</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- SDA -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="100">
+        <div class="h-40 bg-blue-100 flex items-center justify-center">
+          <i class="fas fa-water text-6xl text-blue-600"></i>
+        </div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg mb-2">Sumber Daya Air</h3>
+          <p class="text-gray-600 mb-4">Drainase, normalisasi sungai, bendungan, dll.</p>
+          <a href="sda.html" class="text-blue-600 font-medium flex items-center">
+  Lihat semua proyek <i class="fas fa-arrow-right ml-2"></i>
+</a>
+        </div>
+      </div>
+
+      <!-- Tata Ruang -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="200">
+        <div class="h-40 bg-green-100 flex items-center justify-center">
+          <i class="fas fa-city text-6xl text-green-600"></i>
+        </div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg mb-2">Tata Ruang</h3>
+          <p class="text-gray-600 mb-4">Rumah sehat, sekolah, rumah ibadah, RTH.</p>
+          <a href="tata-ruang.html" class="text-green-600 font-medium flex items-center">
+            Lihat Semua proyek <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Bina Marga -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="300">
+        <div class="h-40 bg-yellow-100 flex items-center justify-center">
+          <i class="fas fa-road text-6xl text-yellow-600"></i>
+        </div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg mb-2">Bina Marga</h3>
+          <p class="text-gray-600 mb-4">Jalan, jembatan, box culvert.</p>
+          <a href="bina-marga.html" class="text-yellow-600 font-medium flex items-center">
+            Lihat Semua Proyek <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Cipta Karya -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
+        <div class="h-40 bg-red-100 flex items-center justify-center">
+          <i class="fas fa-building text-6xl text-red-600"></i>
+        </div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg mb-2">Cipta Karya</h3>
+          <p class="text-gray-600 mb-4">Air bersih, SPALD, permukiman.</p>
+          <a href="cipta-karya.html" class="text-red-600 font-medium flex items-center">
+            Lihat proyek <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Jasa Konstruksi -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
+        <div class="h-40 bg-red-100 flex items-center justify-center">
+          <i class="fas fa-building text-6xl text-red-600"></i>
+        </div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg mb-2">Jasa Konstruksi</h3>
+          <p class="text-gray-600 mb-4">Peningkatan Kapasitas Kelembagaan, Jumlah Tenaga Terampil Konstruksi,</p>
+          <a href="jasa-konstruksi.html" class="text-red-600 font-medium flex items-center">
+            Lihat Data <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sekertariat -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
+        <div class="h-40 bg-red-100 flex items-center justify-center">
+          <i class="fas fa-home text-6xl text-red-600"></i>
+        </div>
+        <div class="p-6">
+          <h3 class="font-bold text-lg mb-2">Sekertariat</h3>
+          <p class="text-gray-600 mb-4">Struktur Organisasi Dinas PUPR</p>
+          <a href="sekertariat.html" class="text-red-600 font-medium flex items-center">
+            Lihat Data <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyek Terbaru -->
+  <section id="projects" class="bg-gray-100 py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center mb-8" data-aos="fade-up">
+        <h2 class="text-2xl font-bold">Proyek Terbaru</h2>
+        <a href="#" class="text-blue-600 hover:underline">Lihat semua →</a>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6" id="project-list">
+        <!-- Data proyek akan diisi oleh JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Tentang PUPR -->
+  <section id="about" class="container mx-auto px-4 py-12">
+    <div class="bg-white rounded-xl shadow-lg p-8" data-aos="fade-up">
+      <h2 class="text-2xl font-bold mb-6">Tentang PUPR Halteng</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <p class="text-gray-700 mb-4">
+            Dinas Pekerjaan Umum dan Penataan Ruang (PUPR) Kabupaten Halmahera Tengah 
+            bertanggung jawab dalam pembangunan infrastruktur wilayah. 
+            Sistem SiPEMIMPIN membantu memantau progres proyek secara real-time.
+          </p>
+          <p class="text-gray-700">
+            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+            <strong>Transparansi:</strong> Data proyek terbuka untuk publik.
+          </p>
+          <p class="text-gray-700 mt-2">
+            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+            <strong>Akuntabilitas:</strong> Progress dilaporkan secara berkala.
+          </p>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+               alt="Kantor PUPR" 
+               class="rounded-lg shadow-md w-full h-auto">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div data-aos="fade-up">
+          <h3 class="text-lg font-bold mb-4">SiPEMIMPIN</h3>
+          <p class="text-gray-400">Sistem Informasi Pengawasan dan Pengendalian Pembangunan Infrastruktur PUPR Halmahera Tengah.</p>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <h4 class="font-bold mb-4">Tautan Cepat</h4>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-gray-400 hover:text-white">Beranda</a></li>
+            <li><a href="#projects" class="text-gray-400 hover:text-white">Proyek</a></li>
+            <li><a href="#map-section" class="text-gray-400 hover:text-white">Peta</a></li>
+            <li><a href="#about" class="text-gray-400 hover:text-white">Tentang</a></li>
+          </ul>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="200">
+          <h4 class="font-bold mb-4">Kontak</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> Jl. Bukit Loiteglas, Weda</li>
+            <li class="flex items-center"><i class="fas fa-phone mr-2"></i> (0921) 123456</li>
+            <li class="flex items-center"><i class="fas fa-envelope mr-2"></i> sipemimpin@halteng.go.id</li>
+          </ul>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="300">
+          <h4 class="font-bold mb-4">Sosial Media</h4>
+          <div class="flex space-x-4">
+            <a href="#" class="bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="bg-blue-400 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-500 transition">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="bg-red-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-700 transition">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400" data-aos="fade-up">
+        <p>© 2024 Dinas PUPR Provinsi Halmahera Tengah. Semua hak dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Peta (Leaflet) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- AOS (Animasi Scroll) -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Script Custom -->
+  <script>
+    // Inisialisasi AOS
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Inisialisasi Peta
+    const map = L.map('map').setView([-0.7893, 127.3833], 10); // Koordinat Halteng
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // Contoh Data Proyek (Simulasi API)
+    const projects = [
+      {
+        id: 1,
+        name: "Normalisasi Sungai",
+        category: "SDA",
+        location: "Kec. Weda",
+        budget: "Rp 2,5 M",
+        progress: 65,
+        image: "https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        date: "12 Mei 2024",
+        views: 245,
+        lat: -0.7893,
+        lng: 127.3833
+      },
+      {
+        id: 2,
+        name: "Pembangunan Jalan Arteri",
+        category: "Bina Marga",
+        location: "Kec. Patani",
+        budget: "Rp 5,2 M",
+        progress: 30,
+        image: "https://images.unsplash.com/photo-1601823984263-b87b59798b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        date: "20 Apr 2024",
+        views: 189,
+        lat: -0.8100,
+        lng: 127.4000
+      },
+      {
+        id: 3,
+        name: "Rumah Sehat Sederhana",
+        category: "Tata Ruang",
+        location: "Kec. Weda Selatan",
+        budget: "Rp 1,8 M",
+        progress: 90,
+        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        date: "5 Mar 2024",
+        views: 312,
+        lat: -0.7700,
+        lng: 127.3500
+      }
+    ];
+
+    // Render Proyek dari Data
+    const projectList = document.getElementById('project-list');
+    projects.forEach(project => {
+      // Warna berdasarkan kategori
+      let colorClass, bgColorClass;
+      switch(project.category) {
+        case "SDA": 
+          colorClass = "text-blue-600";
+          bgColorClass = "bg-blue-100";
+          break;
+        case "Bina Marga": 
+          colorClass = "text-yellow-600";
+          bgColorClass = "bg-yellow-100";
+          break;
+        case "Tata Ruang": 
+          colorClass = "text-green-600";
+          bgColorClass = "bg-green-100";
+          break;
+        default: 
+          colorClass = "text-gray-600";
+          bgColorClass = "bg-gray-100";
+      }
+
+      // Tambahkan marker ke peta
+      L.marker([project.lat, project.lng]).addTo(map)
+        .bindPopup(`<b>${project.name}</b><br>Progress: ${project.progress}%`);
+
+      // Render card proyek
+      projectList.innerHTML += `
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition" data-aos="fade-up">
+          <div class="h-48 bg-cover bg-center" style="background-image: url('${project.image}');"></div>
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="font-bold text-lg">${project.name}</h3>
+              <span class="${bgColorClass} ${colorClass} text-xs px-2 py-1 rounded">${project.category}</span>
+            </div>
+            <p class="text-gray-600 mb-4">${project.location} | Anggaran: ${project.budget}</p>
+            <div class="mb-3">
+              <div class="flex justify-between text-sm mb-1">
+                <span>Progress</span>
+                <span>${project.progress}%</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="${colorClass.replace('text', 'bg')} h-2 rounded-full" style="width: ${project.progress}%"></div>
+              </div>
+            </div>
+            <div class="flex justify-between text-sm text-gray-500">
+              <span><i class="far fa-calendar mr-1"></i> ${project.date}</span>
+              <span><i class="far fa-eye mr-1"></i> ${project.views}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    // Contoh Fetch API (Uncomment untuk penggunaan nyata)
+    /*
+    fetch('https://api.sipemimpin.halteng.go.id/projects')
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    */
+  </script>
+</body>
+</html>
